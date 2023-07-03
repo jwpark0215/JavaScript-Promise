@@ -1,37 +1,19 @@
-const statusRef = document.querySelector(".status")
-const videoRef = document.querySelector(".video")
-
-function getSubscription(){
-    return new Promise((resolve, reject)=>{
-        resolve(undefined)
-    })
+function sort(number){
+   for(let i = 0; i < number.length; i++){
+    for(let k = i + 1; k < number.length; k++){
+        if(number[k].price > number[i].price){
+            let value = number[i]
+            number[i] = number[k]
+            number[k] = value
+        }
+    }
+   }
+   return number
 }
 
-function getVideo(subscriptionStatus){
-    return new Promise((resolve,reject) =>{
-        if(subscriptionStatus === "VIP"){
-            resolve("Show Video")
-        }
-        else if(subscriptionStatus === "FREE"){
-            resolve("show trailer")
-        }
-        else{
-            reject("no video")
-        }
-    })
- }
-
-
-
-async function letsTry(){
-    const check = (await getSubscription())
-    try{
-        console.log(await getVideo(check))
-    }
-    catch(e){
-         console.log(e)
-         videoRef.innerHTML = e
-    }
-}
-
-letsTry()
+console.log(sort([ 
+    {id: 1,price: 50},
+    {id: 2,price: 30},
+    {id: 3,price: 60},
+    {id: 4,price: 10}
+]))
